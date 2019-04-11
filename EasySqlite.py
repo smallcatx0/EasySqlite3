@@ -8,7 +8,7 @@ class EasySqlite:
     }
     errorMsg = ''  # 错误信息
     lastSql = ''   # 最后一条sql
-
+    lastId = None
     def __init__(self, database):
         '''sqlite数据库操作工具类
 
@@ -186,6 +186,7 @@ class EasySqlite:
     def insert(self, data):
         '''插入一条数据
         @param data [dict] 新增的数据 字典格式 k：字段名 v：插入的值
+        @return [int] 此条数据的id
         @author Tan<smallcatx0@gmail.com>
         '''
         if 'table' not in self.jointSql:
@@ -202,14 +203,19 @@ class EasySqlite:
         sql += tmpK + ' VALUES ' + tmpV
         res = self.exec(sql)
         if res:
-            return self
+            self.lastId = res.lastrowid
+            return self.lastId
         else:
             return False
 
+    def getLastId(self):
+        return self.lastId
+        
     def insertAll(self, data):
         '''插入多条数据
 
         @param data [list] 新增的数据
+        @return [int] 最后一个数据的id
         @author Tan<smallcatx0@gmail.com>
         '''
         for one in data:
