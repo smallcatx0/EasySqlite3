@@ -53,7 +53,7 @@ class EasySqlite:
         @param filePath [str] sql脚本文件的位置
         @author Tan<smallcatx0@gmail.com>
         '''
-        with open(sqlPath, 'r') as fp:
+        with open(sqlPath, 'r', encoding='utf-8') as fp:
             sqlCon = fp.read()
         return self.execm(sqlCon)
 
