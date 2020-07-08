@@ -1,4 +1,4 @@
-import EasySqlite
+from __init__ import EasySqlite
 
 initSql = '''
     DROP TABLE IF EXISTS "main"."grade";
@@ -18,7 +18,7 @@ initSql = '''
     );
 '''
 # 连接数据
-db = EasySqlite.EasySqlite('test.db')
+db = EasySqlite('test.db')
 
 # 1 执行建表语句--A 传入要运行的sql语句1
 # res = db.execm(initSql)
